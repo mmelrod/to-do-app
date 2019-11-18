@@ -1,0 +1,22 @@
+body {
+  padding-left: 5rem;
+}
+
+header {
+  height: 12vh;
+}
+
+h1 {
+  color: rgb(255, 0, 0);;
+  font-weight: bold;
+}
+
+label {
+  padding-right: 1rem;
+}
+
+li {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  font-size: 1.2rem;
+}
