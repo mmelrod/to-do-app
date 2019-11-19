@@ -3,7 +3,7 @@ function onReady() {
   const newToDoText = document.getElementById('newToDoText');
   const toDoList = document.getElementById('toDoList');
 
-  addToDoForm.addEventListener('submit', () => {
+  addToDoForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     //get the text
@@ -16,25 +16,26 @@ function onReady() {
     let checkbox = document.createElement('input');
 
     // create a new delete button
-    let button = document.createElement('button');
-
-    // set the button's type to delete
-    checkbox.type = "delete";
+    let deleteButton = document.createElement('button');
 
     // set the input's type to checkbox
     checkbox.type = "checkbox";
 
     //label the delete button
-    button.textContent = "Delete";
+    deleteButton.textContent = "Delete";
 
     // set the title
     newLi.textContent = title;
+
+    deleteButton.addEventListener('click', function(event){
+      toDoList.removeChild(this.parentElement);
+    })
 
     // attach the checkbox to the li
     newLi.appendChild(checkbox);
 
     // attach the delete button to the li
-    newLi.appendChild(button);
+    newLi.appendChild(deleteButton);
 
     // attach the li to the ul
     toDoList.appendChild(newLi);
