@@ -1,51 +1,62 @@
 function onReady() {
+  let id = 0;
+  const toDos = [];
   const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
 
-  addToDoForm.addEventListener('submit', () => {
-    event.preventDefault();
 
-    //get the text
-    let title = newToDoText.value;
+  function createNewToDo() {
+    const newToDoText = document.getElementById('newToDoText');
+    if (!newToDoText.value) { return; }
 
-    // create a new li
-    let newLi = document.createElement('li');
+    toDos.push({
+      title: newToDoText.value,
+      complete: false,
+      id: id.value
+   });
+   newToDoText.value = '';
 
-    // create a new input
-    let checkbox = document.createElement('input');
+   renderTheUI();
+   id = id+1;
+  }
 
-    // create a new delete button
-    let button = document.createElement('button');
+  function renderTheUI() {
+    const toDoList = document.getElementById('toDoList');
+    const deleteToDo = document.getElementById('DelButton');
 
-    // set the button's type to delete
-    checkbox.type = "delete";
+    toDoList.textContent = '';
 
-    // set the input's type to checkbox
-    checkbox.type = "checkbox";
+    toDos.forEach(function(toDo) {
+      const newLi = document.createElement('li');
+      const checkbox = document.createElement('input');
+      const deletebutton = document.createElement('button');
 
-    //label the delete button
-    button.textContent = "Delete";
+      checkbox.type = "checkbox";
 
-    // set the title
-    newLi.textContent = title;
+      deletebutton.textContent = "Delete";
+      deletebutton.type = "DelButton";
 
-    // attach the checkbox to the li
-    newLi.appendChild(checkbox);
+      newLi.textContent = toDo.title;
 
-    // attach the delete button to the li
-    newLi.appendChild(button);
-
-    // attach the li to the ul
-    toDoList.appendChild(newLi);
-
-    //empty the input
-    newToDoText.value = '';
-
+      toDoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
+      newLi.appendChild(deletebutton);
     });
 
-}
+  }
 
+  addToDoForm.addEventListener('submit', event => {
+    event.preventDefault();
+    createNewToDo();
+  });
+
+  deleteToDo.addEventListener('deleteToDo', event => {
+    event.preventDefault();
+    toDos = toDos.filter(id !==)
+    renderTheUI();
+  });
+
+  renderTheUI();
+}
 
 window.onload = function() {
   onReady();
